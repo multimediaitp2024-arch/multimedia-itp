@@ -182,3 +182,35 @@
     border-right-color: var(--border);
   }
 }
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all .3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+.card svg {
+  color: #F97316 !important;
+  font-size: 42px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+
+.card svg {
+  color: #F97316;
+}
+body {
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+    #102A43 0%,
+    #0F766E 100%
+  );
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
