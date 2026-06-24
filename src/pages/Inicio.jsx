@@ -41,22 +41,23 @@ function Inicio() {
     boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
   }}
 >
-      <img
+    <img
   src={logo}
   alt="ITP"
-  width="140"
-  style={{
-    marginBottom: "10px"
-  }}
+  width="120"
 />
 
-      <h1
+ <h1
   style={{
     color: "#102A43",
-    marginBottom: "30px"
+    fontSize: "clamp(1.6rem, 4vw, 3rem)",
+    lineHeight: "1.2",
+    marginBottom: "10px",
   }}
 >
-  Iglesia Tabernáculo Pentecostal
+  Iglesia Tabernáculo
+  <br />
+  Pentecostal
 </h1>
 
 <h2
