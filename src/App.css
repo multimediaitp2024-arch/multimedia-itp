@@ -237,3 +237,30 @@ body {
   color: white !important;
   border-radius: 50%;
 }
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+
+.dia-miercoles {
+  background: #DBEAFE !important;
+  border-radius: 50%;
+}
+
+.dia-jueves {
+  background: #DCFCE7 !important;
+  border-radius: 50%;
+}
+
+.dia-sabado {
+  background: #FFEDD5 !important;
+  border-radius: 50%;
+}
+
+.dia-domingo {
+  background: #FEE2E2 !important;
+  border-radius: 50%;
+}
