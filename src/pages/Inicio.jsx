@@ -31,14 +31,24 @@ function Inicio() {
   };
 
   return (
-    <div
+ <div
   style={{
-    maxWidth: "1200px",
-    margin: "20px auto",
+    width: "100%",
+    minHeight: "100vh",
+    boxSizing: "border-box",
+
+    padding: "15px",
+
     background: "#fff",
-    borderRadius: "25px",
-    padding: "30px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
+
+    borderRadius: window.innerWidth > 768 ? "25px" : "0px",
+
+    maxWidth: window.innerWidth > 768 ? "1200px" : "100%",
+
+    margin:
+      window.innerWidth > 768
+        ? "20px auto"
+        : "0",
   }}
 >
     <img
@@ -76,22 +86,58 @@ function Inicio() {
   marginTop: "20px",
 }}
 >
-  <div className="card">
+  <div
+  className="card"
+  style={{
+    background: "#ffffff",
+    borderRadius: "18px",
+    padding: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,.12)",
+    cursor: "pointer",
+  }}
+>
   <FaCalendarAlt size={40} color="#081c77" />
   <h3>Turnos</h3>
 </div>
 
-<div className="card">
+<div
+  className="card"
+  style={{
+    background: "#ffffff",
+    borderRadius: "18px",
+    padding: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,.12)",
+    cursor: "pointer",
+  }}
+>
   <FaBible size={40} color="#924a20" />
   <h3>Cultos</h3>
 </div>
 
-<div className="card">
+<div
+  className="card"
+  style={{
+    background: "#ffffff",
+    borderRadius: "18px",
+    padding: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,.12)",
+    cursor: "pointer",
+  }}
+>
   <FaUsers size={40} color="#0F766E" />
   <h3>Equipo</h3>
 </div>
 
-<div className="card">
+<div
+  className="card"
+  style={{
+    background: "#ffffff",
+    borderRadius: "18px",
+    padding: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,.12)",
+    cursor: "pointer",
+  }}
+>
   <FaVideo size={40} color="#700874" />
   <h3>En Vivo</h3>
 </div>
@@ -102,9 +148,10 @@ function Inicio() {
           style={{
             background: "linear-gradient(135deg,#0F766E,#14B8A6)",
             color: "white",
-            padding: "20px",
+            padding: "16px",
             borderRadius: "15px",
             marginTop: "20px",
+            boxShadow: "0 4px 15px rgba(0,0,0,.15)",
           }}
         >
           <h3>Próximo Culto</h3>
@@ -118,13 +165,13 @@ function Inicio() {
       {turno && (
         <div
           style={{
-            
-            background: "#FFF8F0",
-            border: "2px solid #F97316",
-            padding: "20px",
-            borderRadius: "15px",
-            marginTop: "20px",
-          }}
+  background: "#FFF8F0",
+  border: "2px solid #F97316",
+  padding: "20px",
+  borderRadius: "15px",
+  marginTop: "20px",
+  boxShadow: "0 4px 15px rgba(0,0,0,.10)",
+}}
         >
           <h3>Turnos</h3>
 
