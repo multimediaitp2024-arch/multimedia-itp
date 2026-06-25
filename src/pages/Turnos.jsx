@@ -44,7 +44,7 @@ function Turnos() {
         style={{
           background: "linear-gradient(135deg,#F97316,#EA580C)",
           color: "white",
-          padding: "20px",
+          padding: "12px",
           borderRadius: "20px",
           marginBottom: "20px",
           textAlign: "center",
@@ -52,18 +52,18 @@ function Turnos() {
       >
         <div
           style={{
-            width: "80px",
+            width: "60px",
             margin: "0 auto",
             background: "white",
             color: "#F97316",
             borderRadius: "15px",
-            padding: "10px",
+            padding: "6px",
             boxShadow: "0 2px 10px rgba(0,0,0,.2)",
           }}
         >
           <div
             style={{
-              fontSize: "2rem",
+              fontSize: "1.5rem",
               fontWeight: "bold",
             }}
           >
@@ -80,11 +80,23 @@ function Turnos() {
           </div>
         </div>
 
-        <h2 style={{ marginTop: "15px" }}>
-          Calendario Multimedia
-        </h2>
-
-        <p>Ministerio de Multimedia ITP</p>
+       <h2
+  style={{
+    marginTop: "8px",
+    marginBottom: "4px",
+    fontSize: "1.2rem",
+  }}
+>
+  Calendario Multimedia
+</h2>
+<p
+  style={{
+    margin: "0",
+    fontSize: "0.9rem",
+  }}
+>
+  Ministerio de Multimedia ITP
+</p>
       </div>
 
       <Calendar
