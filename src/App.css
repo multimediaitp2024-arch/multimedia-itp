@@ -214,3 +214,26 @@ body {
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
 }
+.dia-miercoles {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.dia-jueves {
+  background: #22c55e !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.dia-sabado {
+  background: #f97316 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.dia-domingo {
+  background: #ef4444 !important;
+  color: white !important;
+  border-radius: 50%;
+}
