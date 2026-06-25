@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { collection, getDocs } from "firebase/firestore";
@@ -23,8 +24,15 @@ function Turnos() {
 
     setTurnos(lista);
 
-    if (lista.length > 0) {
-      setTurnoActual(lista[0]);
+    const hoy = new Date().toISOString().split("T")[0];
+
+    const proximos = lista
+      .filter((t) => t.fecha >= hoy)
+      .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+    if (proximos.length > 0) {
+      setTurnoActual(proximos[0]);
+      setFechaSeleccionada(new Date(proximos[0].fecha));
     }
   };
 
@@ -37,6 +45,10 @@ function Turnos() {
 
     setTurnoActual(encontrado || null);
   };
+
+  const mes = fechaSeleccionada
+    .toLocaleDateString("es-ES", { month: "short" })
+    .toUpperCase();
 
   return (
     <div style={{ padding: "20px", paddingBottom: "100px" }}>
@@ -76,27 +88,28 @@ function Turnos() {
               fontWeight: "bold",
             }}
           >
-            JUL
+            {mes}
           </div>
         </div>
 
-       <h2
-  style={{
-    marginTop: "8px",
-    marginBottom: "4px",
-    fontSize: "1.2rem",
-  }}
->
-  Calendario Multimedia
-</h2>
-<p
-  style={{
-    margin: "0",
-    fontSize: "0.9rem",
-  }}
->
-  Ministerio de Multimedia ITP
-</p>
+        <h2
+          style={{
+            marginTop: "8px",
+            marginBottom: "4px",
+            fontSize: "1.2rem",
+          }}
+        >
+          Calendario Multimedia
+        </h2>
+
+        <p
+          style={{
+            margin: "0",
+            fontSize: "0.9rem",
+          }}
+        >
+          Ministerio de Multimedia ITP
+        </p>
       </div>
 
       <Calendar
@@ -182,40 +195,25 @@ function Turnos() {
 
         {turnoActual && (
           <>
-            <p>
-              <strong>Día:</strong>{" "}
-              {turnoActual.dia}
-            </p>
-
-            <p>
-              <strong>Fecha:</strong>{" "}
-              {turnoActual.fecha}
-            </p>
-
             {turnoActual.cabina && (
-              <p>
-                🎛 Cabina: {turnoActual.cabina}
-              </p>
+              <p>🎛 Cabina: {turnoActual.cabina}</p>
             )}
 
             {turnoActual.cabinaCulto && (
               <p>
-                🎛 Cabina Culto:{" "}
-                {turnoActual.cabinaCulto}
+                🎛 Cabina Culto: {turnoActual.cabinaCulto}
               </p>
             )}
 
             {turnoActual.cabinaDevocional && (
               <p>
-                🎚 Cabina Devocional:{" "}
-                {turnoActual.cabinaDevocional}
+                🎚 Cabina Devocional: {turnoActual.cabinaDevocional}
               </p>
             )}
 
             {turnoActual.transmision && (
               <p>
-                📡 Transmisión:{" "}
-                {turnoActual.transmision}
+                📡 Transmisión: {turnoActual.transmision}
               </p>
             )}
 
