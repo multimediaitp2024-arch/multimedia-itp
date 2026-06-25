@@ -69,12 +69,12 @@ function Inicio() {
 </h2>
 
       <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
-    gap: "15px",
-    marginTop: "25px",
-  }}
+ style={{
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "15px",
+  marginTop: "20px",
+}}
 >
   <div className="card">
   <FaCalendarAlt size={40} color="#081c77" />

@@ -18,28 +18,69 @@ function BottomNav() {
         background: "#102A43",
         display: "flex",
         justifyContent: "space-around",
-        padding: "12px 0",
+        padding: "16px 0",
         zIndex: 1000,
+        boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
       }}
     >
-      <Link to="/" style={{ color: "white" }}>
-        <FaHome />
+      <Link
+        to="/"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          textAlign: "center",
+        }}
+      >
+        <FaHome size={28} />
+        <div style={{ fontSize: "12px" }}>Inicio</div>
       </Link>
 
-      <Link to="/turnos" style={{ color: "white" }}>
-        <FaCalendarAlt />
+      <Link
+        to="/turnos"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          textAlign: "center",
+        }}
+      >
+        <FaCalendarAlt size={28} />
+        <div style={{ fontSize: "12px" }}>Turnos</div>
       </Link>
 
-      <Link to="/cultos" style={{ color: "white" }}>
-        <FaBible />
+      <Link
+        to="/cultos"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          textAlign: "center",
+        }}
+      >
+        <FaBible size={28} />
+        <div style={{ fontSize: "12px" }}>Cultos</div>
       </Link>
 
-      <Link to="/limpieza" style={{ color: "white" }}>
-        <FaBroom />
+      <Link
+        to="/limpieza"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          textAlign: "center",
+        }}
+      >
+        <FaBroom size={28} />
+        <div style={{ fontSize: "12px" }}>Limpieza</div>
       </Link>
 
-      <Link to="/envivo" style={{ color: "white" }}>
-        <FaVideo />
+      <Link
+        to="/envivo"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          textAlign: "center",
+        }}
+      >
+        <FaVideo size={28} />
+        <div style={{ fontSize: "12px" }}>En Vivo</div>
       </Link>
     </div>
   );
