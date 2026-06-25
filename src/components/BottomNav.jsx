@@ -79,6 +79,9 @@ function BottomNav() {
           textAlign: "center",
         }}
       >
+        <Link to="/equipo" style={{ color: "white" }}>
+  <FaUsers size={28} />
+</Link>
         <FaVideo size={28} />
         <div style={{ fontSize: "12px" }}>En Vivo</div>
       </Link>

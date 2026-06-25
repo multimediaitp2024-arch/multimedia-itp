@@ -183,13 +183,20 @@ function Inicio() {
           style={{
             background: "linear-gradient(135deg,#0F766E,#14B8A6)",
             color: "white",
-            padding: "18px",
+            padding: "12px",
             borderRadius: "15px",
             marginTop: "25px",
             boxShadow: "0 4px 15px rgba(0,0,0,.15)",
           }}
         >
-          <h3>📖 Próximo Culto</h3>
+         <h3
+  style={{
+    margin: "0 0 10px 0",
+    fontSize: "1.15rem",
+  }}
+>
+  📖 Próximo Culto
+</h3>
 
           <p><strong>Fecha:</strong> {culto.fecha}</p>
 
@@ -215,7 +222,14 @@ function Inicio() {
             boxShadow: "0 4px 15px rgba(0,0,0,.10)",
           }}
         >
-          <h3>🎛 Próximo Turno</h3>
+          <h3
+  style={{
+    margin: "0 0 10px 0",
+    fontSize: "1.15rem",
+  }}
+>
+  🎛 Próximo Turno
+</h3>
 
           <p><strong>Fecha:</strong> {turno.fecha}</p>
 
