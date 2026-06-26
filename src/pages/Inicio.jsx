@@ -118,8 +118,15 @@ function Inicio() {
               boxShadow: "0 4px 15px rgba(0,0,0,.12)",
             }}
           >
-            <FaCalendarAlt size={40} color="#081c77" />
-            <h3>Turnos</h3>
+            <FaCalendarAlt size={32} color="#081c77" />
+            <h3
+style={{
+marginTop:8,
+fontSize:"1rem"
+}}
+>
+Turnos
+</h3>
           </div>
         </Link>
 
@@ -136,8 +143,15 @@ function Inicio() {
               boxShadow: "0 4px 15px rgba(0,0,0,.12)",
             }}
           >
-            <FaBible size={40} color="#924a20" />
-            <h3>Cultos</h3>
+            <FaBible size={32} color="#924a20" />
+            <h3
+style={{
+marginTop:8,
+fontSize:"1rem"
+}}
+>
+Turnos
+</h3>
           </div>
         </Link>
 
@@ -154,8 +168,15 @@ function Inicio() {
               boxShadow: "0 4px 15px rgba(0,0,0,.12)",
             }}
           >
-            <FaUsers size={40} color="#0F766E" />
-            <h3>Equipo</h3>
+            <FaUsers size={32} color="#0F766E" />
+            <h3
+style={{
+marginTop:8,
+fontSize:"1rem"
+}}
+>
+Turnos
+</h3>
           </div>
         </Link>
 
@@ -172,8 +193,15 @@ function Inicio() {
               boxShadow: "0 4px 15px rgba(0,0,0,.12)",
             }}
           >
-            <FaVideo size={40} color="#700874" />
-            <h3>En Vivo</h3>
+            <FaVideo size={32} color="#700874" />
+           <h3
+style={{
+marginTop:8,
+fontSize:"1rem"
+}}
+>
+Turnos
+</h3>
           </div>
         </Link>
       </div>
