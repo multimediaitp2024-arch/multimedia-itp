@@ -125,7 +125,7 @@ marginTop:8,
 fontSize:"1rem"
 }}
 >
-Turnos
+Cultos
 </h3>
           </div>
         </Link>
@@ -150,7 +150,7 @@ marginTop:8,
 fontSize:"1rem"
 }}
 >
-Turnos
+Equipo
 </h3>
           </div>
         </Link>
@@ -175,7 +175,7 @@ marginTop:8,
 fontSize:"1rem"
 }}
 >
-Turnos
+En vivo
 </h3>
           </div>
         </Link>
