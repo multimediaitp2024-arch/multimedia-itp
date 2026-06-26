@@ -150,7 +150,7 @@ marginTop:8,
 fontSize:"1rem"
 }}
 >
-Equipo
+Culto
 </h3>
           </div>
         </Link>
@@ -175,7 +175,7 @@ marginTop:8,
 fontSize:"1rem"
 }}
 >
-Culto
+Equipo
 </h3>
           </div>
         </Link>
