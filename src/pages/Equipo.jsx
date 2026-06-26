@@ -89,21 +89,18 @@ function Equipo() {
               >
                 {persona.nombre}
               </h3>
-
-              <a
-                href={`https://wa.me/593${persona.telefono.substring(
-                  1
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  color: "#25D366",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                }}
-              >
-                <FaWhatsapp /> {persona.telefono}
-              </a>
+<a
+  href={`https://wa.me/${persona.telefono}`}
+  target="_blank"
+  rel="noreferrer"
+  style={{
+    color: "#25D366",
+    textDecoration: "none",
+    fontWeight: "bold",
+  }}
+>
+  <FaWhatsapp /> {persona.telefono}
+</a>
             </div>
           </div>
         </div>

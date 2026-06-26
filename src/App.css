@@ -275,4 +275,14 @@ body {
     max-width: 1200px;
     margin: 0 auto;
   }
+}.dia-miercoles {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.dia-domingo {
+  background: #ef4444 !important;
+  color: white !important;
+  border-radius: 50%;
 }

@@ -1,9 +1,10 @@
+
 import { Link } from "react-router-dom";
 import {
   FaHome,
   FaCalendarAlt,
   FaBible,
-  FaBroom,
+  FaUsers,
   FaVideo,
 } from "react-icons/fa";
 
@@ -20,7 +21,7 @@ function BottomNav() {
         justifyContent: "space-around",
         padding: "16px 0",
         zIndex: 1000,
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
+        boxShadow: "0 -2px 10px rgba(0,0,0,.2)",
       }}
     >
       <Link
@@ -32,7 +33,7 @@ function BottomNav() {
         }}
       >
         <FaHome size={28} />
-        <div style={{ fontSize: "12px" }}>Inicio</div>
+        <div style={{ fontSize: 12 }}>Inicio</div>
       </Link>
 
       <Link
@@ -44,7 +45,7 @@ function BottomNav() {
         }}
       >
         <FaCalendarAlt size={28} />
-        <div style={{ fontSize: "12px" }}>Turnos</div>
+        <div style={{ fontSize: 12 }}>Turnos</div>
       </Link>
 
       <Link
@@ -56,19 +57,19 @@ function BottomNav() {
         }}
       >
         <FaBible size={28} />
-        <div style={{ fontSize: "12px" }}>Cultos</div>
+        <div style={{ fontSize: 12 }}>Cultos</div>
       </Link>
 
       <Link
-        to="/limpieza"
+        to="/equipo"
         style={{
           color: "white",
           textDecoration: "none",
           textAlign: "center",
         }}
       >
-        <FaBroom size={28} />
-        <div style={{ fontSize: "12px" }}>Limpieza</div>
+        <FaUsers size={28} />
+        <div style={{ fontSize: 12 }}>Equipo</div>
       </Link>
 
       <Link
@@ -79,11 +80,8 @@ function BottomNav() {
           textAlign: "center",
         }}
       >
-        <Link to="/equipo" style={{ color: "white" }}>
-  <FaUsers size={28} />
-</Link>
         <FaVideo size={28} />
-        <div style={{ fontSize: "12px" }}>En Vivo</div>
+        <div style={{ fontSize: 12 }}>En Vivo</div>
       </Link>
     </div>
   );

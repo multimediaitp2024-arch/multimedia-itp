@@ -6,8 +6,8 @@ import logo from "../assets/logo-itp.png";
 import {
   FaCalendarAlt,
   FaBible,
-  FaUsers,
   FaVideo,
+  FaUsers,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
