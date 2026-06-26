@@ -4,6 +4,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { FaUserCircle, FaWhatsapp } from "react-icons/fa";
 
+// Cargar automáticamente todas las fotos
+const fotos = import.meta.glob("../assets/equipo/*.jpg", {
+  eager: true,
+  import: "default",
+});
+
 function Equipo() {
   const [equipo, setEquipo] = useState([]);
 
@@ -17,7 +23,10 @@ function Equipo() {
     const lista = [];
 
     querySnapshot.forEach((doc) => {
-      lista.push(doc.data());
+      lista.push({
+        id: doc.id,
+        ...doc.data(),
+      });
     });
 
     lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
@@ -39,10 +48,10 @@ function Equipo() {
         style={{
           background: "linear-gradient(135deg,#0F766E,#14B8A6)",
           color: "white",
-          padding: "18px",
+          padding: "20px",
           borderRadius: "20px",
           textAlign: "center",
-          marginBottom: "20px",
+          marginBottom: "25px",
           boxShadow: "0 5px 18px rgba(0,0,0,.15)",
         }}
       >
@@ -65,70 +74,83 @@ function Equipo() {
         </p>
       </div>
 
-      {equipo.map((persona, index) => {
-        // Convierte 0991234567 -> 593991234567
-        const numeroWhatsapp =
-          "593" + persona.telefono.substring(1);
+      {/* Tarjetas */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "18px",
+        }}
+      >
+        {equipo.map((persona) => {
+          const foto =
+            fotos[`../assets/equipo/${persona.id}.jpg`];
 
-        return (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              background: "#fff",
-              padding: "16px",
-              borderRadius: "18px",
-              marginBottom: "15px",
-              boxShadow: "0 4px 15px rgba(0,0,0,.10)",
-              transition: ".2s",
-            }}
-          >
+          const numeroWhatsapp =
+            "593" + persona.telefono.substring(1);
+
+          return (
             <div
+              key={persona.id}
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "15px",
+                background: "#fff",
+                borderRadius: "18px",
+                padding: "18px",
+                textAlign: "center",
+                boxShadow: "0 4px 15px rgba(0,0,0,.10)",
               }}
             >
-              <FaUserCircle
-                size={52}
-                color="#0F766E"
-              />
-
-              <div>
-                <h3
+              {foto ? (
+                <img
+                  src={foto}
+                  alt={persona.nombre}
                   style={{
-                    margin: "0 0 6px 0",
-                    color: "#102A43",
+                    width: "90px",
+                    height: "90px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    marginBottom: "12px",
+                    border: "3px solid #14B8A6",
                   }}
-                >
-                  {persona.nombre}
-                </h3>
+                />
+              ) : (
+                <FaUserCircle
+                  size={90}
+                  color="#0F766E"
+                />
+              )}
 
-                <a
-                  href={`https://wa.me/${numeroWhatsapp}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    color: "#25D366",
-                    textDecoration: "none",
-                    fontWeight: "bold",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    fontSize: "15px",
-                  }}
-                >
-                  <FaWhatsapp size={18} />
-                  {persona.telefono}
-                </a>
-              </div>
+              <h3
+                style={{
+                  margin: "10px 0",
+                  color: "#102A43",
+                  fontSize: "17px",
+                }}
+              >
+                {persona.nombre}
+              </h3>
+
+              <a
+                href={`https://wa.me/${numeroWhatsapp}`}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: "#25D366",
+                  textDecoration: "none",
+                  fontWeight: "bold",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  justifyContent: "center",
+                }}
+              >
+                <FaWhatsapp />
+                WhatsApp
+              </a>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
       {equipo.length === 0 && (
         <div

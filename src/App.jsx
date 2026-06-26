@@ -6,6 +6,7 @@ import Equipo from "./pages/Equipo";
 import Cultos from "./pages/Cultos";
 import Limpieza from "./pages/Limpieza";
 import EnVivo from "./pages/EnVivo";
+import Splash from "./pages/Splash";
 
 import BottomNav from "./components/BottomNav";
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+       <Route path="/splash" element={<Splash />} />
         <Route path="/" element={<Inicio />} />
         <Route path="/turnos" element={<Turnos />} />
         <Route path="/cultos" element={<Cultos />} />

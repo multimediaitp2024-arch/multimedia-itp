@@ -1,6 +1,8 @@
-
 import { initializeApp } from "firebase/app";
+
 import { getFirestore } from "firebase/firestore";
+
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfzZvz6_Xs6WCqdp8NTVXb83FySOqlt8s",
@@ -9,9 +11,11 @@ const firebaseConfig = {
   storageBucket: "multimedia-itp.firebasestorage.app",
   messagingSenderId: "1098940170731",
   appId: "1:1098940170731:web:4c840b3dbb51ad7fee99ae",
-  measurementId: "G-X4JM2GM2HX"
+  measurementId: "G-X4JM2GM2HX",
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
+
+export const auth = getAuth(app);
