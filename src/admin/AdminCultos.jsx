@@ -1,3 +1,5 @@
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import {
   collection,
   deleteDoc,
@@ -76,11 +78,10 @@ export default function AdminCultos() {
 
     <div className="max-w-5xl mx-auto p-5">
 
-      <h1 className="text-3xl font-bold mb-6">
-
-        Administrar Cultos
-
-      </h1>
+     <AdminHeader
+  titulo="Administrar Cultos"
+  subtitulo="Crear, editar y eliminar cultos."
+/>
 
       <CultoForm
         onSave={guardar}
@@ -90,67 +91,31 @@ export default function AdminCultos() {
 
       <div className="grid gap-4">
 
-        {cultos.map((culto) => (
+      {cultos.map((culto) => (
 
-          <div
-            key={culto.id}
-            className="bg-white shadow rounded-xl p-5 flex justify-between items-start"
-          >
+  <AdminCard
+    key={culto.id}
+    titulo={culto.fecha}
+    subtitulo={culto.predicador}
+    onEdit={() => setEditing(culto)}
+    onDelete={() => eliminar(culto.id)}
+  >
 
-            <div>
+    <p>
+      <strong>Día:</strong> {culto.dia}
+    </p>
 
-              <h2 className="font-bold text-lg">
+    <p>
+      <strong>Tema:</strong> {culto.tema}
+    </p>
 
-                {culto.fecha}
+    <p>
+      <strong>Versículos:</strong> {culto.versiculos}
+    </p>
 
-              </h2>
+  </AdminCard>
 
-              <p>
-                <b>Día:</b> {culto.dia}
-              </p>
-
-              <p>
-                <b>Predicador:</b>{" "}
-                {culto.predicador}
-              </p>
-
-              <p>
-                <b>Tema:</b>{" "}
-                {culto.tema}
-              </p>
-
-              <p>
-                <b>Versículos:</b>{" "}
-                {culto.versiculos}
-              </p>
-
-            </div>
-
-            <div className="flex gap-3">
-
-              <button
-                onClick={() =>
-                  setEditing(culto)
-                }
-                className="text-blue-600 text-xl"
-              >
-                <FaEdit />
-              </button>
-
-              <button
-                onClick={() =>
-                  eliminar(culto.id)
-                }
-                className="text-red-600 text-xl"
-              >
-                <FaTrash />
-              </button>
-
-            </div>
-
-          </div>
-
-        ))}
+))}
 
         {cultos.length === 0 && (
 

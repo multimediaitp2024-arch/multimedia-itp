@@ -1,4 +1,5 @@
-
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import { useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -45,9 +46,11 @@ export default function AdminStreaming() {
   return (
     <div className="max-w-3xl mx-auto p-5">
 
-      <h1 className="text-3xl font-bold mb-6">
-        Configuración Streaming
-      </h1>
+     <AdminHeader
+  titulo="Configuración Streaming"
+  subtitulo="Administra los enlaces de YouTube y WhatsApp."
+/>
+
 
       <form
         onSubmit={guardar}

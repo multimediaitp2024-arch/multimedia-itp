@@ -1,4 +1,5 @@
-
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import { useEffect, useState } from "react";
 import {
   addDoc,
@@ -69,9 +70,16 @@ export default function AdminLimpieza() {
   return (
     <div className="max-w-5xl mx-auto p-5">
 
-      <h1 className="text-3xl font-bold mb-6">
-        Administrar Limpieza
-      </h1>
+      <AdminHeader
+  titulo="Administrar Limpieza"
+  subtitulo="Organiza el cronograma de limpieza."
+/>
+<AdminCard
+    titulo={item.responsable}
+    subtitulo={`${item.fechaInicio} - ${item.fechaFin}`}
+    onEdit={() => setEditing(item)}
+    onDelete={() => eliminar(item.id)}
+></AdminCard>
 
       <LimpiezaForm
         onSave={guardar}

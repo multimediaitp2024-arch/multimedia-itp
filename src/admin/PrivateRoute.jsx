@@ -1,33 +1,32 @@
-import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
+import { Navigate } from "react-router-dom";
 
-function PrivateRoute({ children }) {
-  const [usuario, setUsuario] = useState(undefined);
+export default function PrivateRoute({ children }) {
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUsuario(user);
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u);
     });
 
-    return unsubscribe;
+    return () => unsub();
   }, []);
 
-  if (usuario === undefined) {
-    return <h2 style={{ textAlign: "center" }}>Cargando...</h2>;
+  // 🔥 IMPORTANTE: mientras carga no mostrar nada
+  if (user === undefined) {
+    return (
+      <div style={{ padding: 20 }}>
+        Cargando sesión...
+      </div>
+    );
   }
 
-  if (!usuario) {
+  // 🚫 si no hay usuario
+  if (!user) {
     return <Navigate to="/login" replace />;
-  }
-
-  // SOLO TU CORREO PUEDE ENTRAR
-  if (usuario.email !== "nico_0229@hotmail.com") {
-    return <Navigate to="/" replace />;
   }
 
   return children;
 }
-
-export default PrivateRoute;

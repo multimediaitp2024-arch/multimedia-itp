@@ -1,90 +1,63 @@
-
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
-  FaCalendarAlt,
-  FaBible,
-  FaUsers,
+  FaChurch,
   FaVideo,
+  FaUsers,
+  FaBroom,
 } from "react-icons/fa";
 
-function BottomNav() {
+export default function BottomNav() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const tabs = [
+    { label: "Inicio", icon: <FaHome />, path: "/" },
+    { label: "Cultos", icon: <FaChurch />, path: "/cultos" },
+    { label: "Turnos", icon: <FaVideo />, path: "/turnos" },
+    { label: "Equipo", icon: <FaUsers />, path: "/equipo" },
+    { label: "Limpieza", icon: <FaBroom />, path: "/limpieza" },
+  ];
+
   return (
     <div
       style={{
         position: "fixed",
         bottom: 0,
         left: 0,
-        width: "100%",
-        background: "#102A43",
+        right: 0,
+        background: "#ffffff",
         display: "flex",
         justifyContent: "space-around",
-        padding: "16px 0",
+        padding: "10px 0",
+        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
         zIndex: 1000,
-        boxShadow: "0 -2px 10px rgba(0,0,0,.2)",
       }}
     >
-      <Link
-        to="/"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <FaHome size={28} />
-        <div style={{ fontSize: 12 }}>Inicio</div>
-      </Link>
-
-      <Link
-        to="/turnos"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <FaCalendarAlt size={28} />
-        <div style={{ fontSize: 12 }}>Turnos</div>
-      </Link>
-
-      <Link
-        to="/cultos"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <FaBible size={28} />
-        <div style={{ fontSize: 12 }}>Cultos</div>
-      </Link>
-
-      <Link
-        to="/equipo"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <FaUsers size={28} />
-        <div style={{ fontSize: 12 }}>Equipo</div>
-      </Link>
-
-      <Link
-        to="/envivo"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <FaVideo size={28} />
-        <div style={{ fontSize: 12 }}>En Vivo</div>
-      </Link>
+      {tabs.map((tab) => (
+        <button
+          key={tab.path}
+          onClick={() => navigate(tab.path)}
+          style={{
+            background: "none",
+            border: "none",
+            color:
+              location.pathname === tab.path
+                ? "#0F766E"
+                : "#6B7280",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            fontSize: "12px",
+            cursor: "pointer",
+          }}
+        >
+          <div style={{ fontSize: "18px" }}>
+            {tab.icon}
+          </div>
+          {tab.label}
+        </button>
+      ))}
     </div>
   );
 }
-
-export default BottomNav;

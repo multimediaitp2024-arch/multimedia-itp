@@ -1,4 +1,5 @@
-
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -71,15 +72,22 @@ export default function AdminEquipo() {
   return (
     <div className="max-w-6xl mx-auto p-5">
 
-      <h1 className="text-3xl font-bold mb-6">
-        Administrar Equipo
-      </h1>
+     <AdminHeader
+  titulo="Administrar Equipo"
+  subtitulo="Gestiona los integrantes del ministerio."
+/>
 
       <EquipoForm
         onSave={guardar}
         editing={editing}
         onCancel={() => setEditing(null)}
       />
+      <AdminCard
+    titulo={persona.nombre}
+    subtitulo={persona.telefono}
+    onEdit={() => setEditing(persona)}
+    onDelete={() => eliminar(persona.id)}
+></AdminCard>
 
       {equipo.length === 0 ? (
 

@@ -1,8 +1,12 @@
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Login() {
   const [correo, setCorreo] = useState("");
@@ -10,6 +14,17 @@ function Login() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  // Auto redirect si ya está logueado
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/admin", { replace: true });
+      }
+    });
+
+    return () => unsub();
+  }, [navigate]);
 
   const iniciarSesion = async (e) => {
     e.preventDefault();
@@ -22,14 +37,14 @@ function Login() {
         password
       );
 
-      // Solo tú podrás ingresar
+      // SOLO TU CORREO
       if (credencial.user.email !== "nico_0229@hotmail.com") {
-        await auth.signOut();
+        await signOut(auth);
         setError("No tienes permisos para acceder.");
         return;
       }
 
-      navigate("/admin");
+      navigate("/admin", { replace: true });
     } catch (err) {
       setError("Correo o contraseña incorrectos.");
     }
@@ -78,7 +93,6 @@ function Login() {
             marginBottom: 15,
             borderRadius: 10,
             border: "1px solid #ccc",
-            boxSizing: "border-box",
           }}
         />
 
@@ -93,17 +107,11 @@ function Login() {
             marginBottom: 20,
             borderRadius: 10,
             border: "1px solid #ccc",
-            boxSizing: "border-box",
           }}
         />
 
         {error && (
-          <p
-            style={{
-              color: "red",
-              marginBottom: 15,
-            }}
-          >
+          <p style={{ color: "red", marginBottom: 15 }}>
             {error}
           </p>
         )}

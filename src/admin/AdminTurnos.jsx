@@ -1,4 +1,5 @@
-
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -52,13 +53,20 @@ export default function AdminTurnos() {
 
     cargarTurnos();
   }
+  <AdminCard
+    titulo={turno.fecha}
+    subtitulo={turno.dia}
+    onEdit={() => setEditing(turno)}
+    onDelete={() => eliminar(turno.id)}
+></AdminCard>
 
   return (
     <div className="max-w-6xl mx-auto p-5">
 
-      <h1 className="text-3xl font-bold mb-6">
-        Administrar Turnos
-      </h1>
+   <AdminHeader
+  titulo="Administrar Turnos"
+  subtitulo="Gestiona los turnos del ministerio."
+/>
 
       <TurnoForm
         onSave={guardar}
