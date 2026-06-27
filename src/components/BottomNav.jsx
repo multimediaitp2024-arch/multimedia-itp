@@ -6,7 +6,15 @@ import {
   FaUsers,
   FaBroom,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
+export default function BottomNav() {
+  return (
+    <div>
+      <Link to="/login">🔐 Admin</Link>
+    </div>
+  );
+}
 export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();

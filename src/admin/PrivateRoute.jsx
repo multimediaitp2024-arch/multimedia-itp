@@ -4,13 +4,9 @@ import { useAuth } from "../context/AuthContext";
 export default function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
 
-  if (loading) {
-    return <div style={{ padding: 20 }}>Cargando sesión...</div>;
-  }
+  if (loading) return <div>Cargando...</div>;
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!user) return <Navigate to="/login" replace />;
 
   return children;
 }

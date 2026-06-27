@@ -8,6 +8,7 @@ export default function TurnoForm({
   editing,
   onCancel,
 }) {
+
   const emptyForm = {
     fecha: "",
     dia: "",
@@ -21,10 +22,35 @@ export default function TurnoForm({
   const [form, setForm] = useState(emptyForm);
   const [equipo, setEquipo] = useState([]);
 
+  // 🔥 CARGA EQUIPO SEGURA
   useEffect(() => {
+    async function cargarEquipo() {
+      try {
+        const snapshot = await getDocs(collection(db, "equipo"));
+
+        const lista = snapshot.docs.map(doc => {
+          const data = doc.data();
+
+          return {
+            id: doc.id,
+            nombre: data.nombre || data.name || "Sin nombre"
+          };
+        });
+
+        lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+        setEquipo(lista);
+
+      } catch (error) {
+        console.log("Error cargando equipo:", error);
+        setEquipo([]);
+      }
+    }
+
     cargarEquipo();
   }, []);
 
+  // 🔥 EDITING SYNC
   useEffect(() => {
     if (editing) {
       setForm(editing);
@@ -32,19 +58,6 @@ export default function TurnoForm({
       setForm(emptyForm);
     }
   }, [editing]);
-
-  async function cargarEquipo() {
-    const snapshot = await getDocs(collection(db, "equipo"));
-
-    const lista = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
-
-    setEquipo(lista);
-  }
 
   function handleChange(e) {
     setForm({
@@ -79,10 +92,9 @@ export default function TurnoForm({
 
       <div className="grid md:grid-cols-2 gap-4">
 
+        {/* FECHA */}
         <div>
-          <label className="block mb-1 font-semibold">
-            Fecha
-          </label>
+          <label className="block mb-1 font-semibold">Fecha</label>
 
           <input
             type="date"
@@ -94,10 +106,9 @@ export default function TurnoForm({
           />
         </div>
 
+        {/* DIA */}
         <div>
-          <label className="block mb-1 font-semibold">
-            Día
-          </label>
+          <label className="block mb-1 font-semibold">Día</label>
 
           <select
             name="dia"
@@ -112,67 +123,27 @@ export default function TurnoForm({
           </select>
         </div>
 
+        {/* MIÉRCOLES */}
         {form.dia === "Miércoles" && (
           <>
-            <CampoPersona
-              titulo="Cabina"
-              nombre="cabina"
-              valor={form.cabina}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Cabina" nombre="cabina" valor={form.cabina} lista={equipo} cambio={handleChange} />
 
-            <CampoPersona
-              titulo="Transmisión"
-              nombre="transmision"
-              valor={form.transmision}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Transmisión" nombre="transmision" valor={form.transmision} lista={equipo} cambio={handleChange} />
 
-            <CampoPersona
-              titulo="Fotos"
-              nombre="fotos"
-              valor={form.fotos}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Fotos" nombre="fotos" valor={form.fotos} lista={equipo} cambio={handleChange} />
           </>
         )}
 
+        {/* DOMINGO */}
         {form.dia === "Domingo" && (
           <>
-            <CampoPersona
-              titulo="Cabina Culto"
-              nombre="cabinaCulto"
-              valor={form.cabinaCulto}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Cabina Culto" nombre="cabinaCulto" valor={form.cabinaCulto} lista={equipo} cambio={handleChange} />
 
-            <CampoPersona
-              titulo="Cabina Devocional"
-              nombre="cabinaDevocional"
-              valor={form.cabinaDevocional}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Cabina Devocional" nombre="cabinaDevocional" valor={form.cabinaDevocional} lista={equipo} cambio={handleChange} />
 
-            <CampoPersona
-              titulo="Transmisión"
-              nombre="transmision"
-              valor={form.transmision}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Transmisión" nombre="transmision" valor={form.transmision} lista={equipo} cambio={handleChange} />
 
-            <CampoPersona
-              titulo="Fotos"
-              nombre="fotos"
-              valor={form.fotos}
-              lista={equipo}
-              cambio={handleChange}
-            />
+            <CampoPersona titulo="Fotos" nombre="fotos" valor={form.fotos} lista={equipo} cambio={handleChange} />
           </>
         )}
 
@@ -195,23 +166,14 @@ export default function TurnoForm({
         )}
 
       </div>
-
     </form>
   );
 }
 
-function CampoPersona({
-  titulo,
-  nombre,
-  valor,
-  lista,
-  cambio,
-}) {
+function CampoPersona({ titulo, nombre, valor, lista, cambio }) {
   return (
     <div>
-      <label className="block mb-1 font-semibold">
-        {titulo}
-      </label>
+      <label className="block mb-1 font-semibold">{titulo}</label>
 
       <select
         name={nombre}
@@ -221,14 +183,15 @@ function CampoPersona({
       >
         <option value="">Seleccione</option>
 
-        {lista.map((persona) => (
-          <option
-            key={persona.id}
-            value={persona.nombre}
-          >
-            {persona.nombre}
-          </option>
-        ))}
+        {lista.length === 0 ? (
+          <option disabled>Cargando equipo...</option>
+        ) : (
+          lista.map((persona) => (
+            <option key={persona.id} value={persona.nombre}>
+              {persona.nombre}
+            </option>
+          ))
+        )}
       </select>
     </div>
   );

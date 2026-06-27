@@ -1,5 +1,4 @@
-import AdminHeader from "../components/AdminHeader";
-import AdminCard from "../components/AdminCard";
+
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -9,12 +8,13 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-import { FaEdit, FaTrash } from "react-icons/fa";
-
 import { db } from "../firebase";
+import AdminHeader from "../components/AdminHeader";
+import AdminCard from "../components/AdminCard";
 import TurnoForm from "../components/TurnoForm";
 
 export default function AdminTurnos() {
+
   const [turnos, setTurnos] = useState([]);
   const [editing, setEditing] = useState(null);
 
@@ -36,13 +36,9 @@ export default function AdminTurnos() {
   }
 
   async function guardar(form) {
-    await setDoc(
-      doc(db, "turnos", form.fecha),
-      form
-    );
+    await setDoc(doc(db, "turnos", form.fecha), form);
 
     setEditing(null);
-
     cargarTurnos();
   }
 
@@ -50,23 +46,16 @@ export default function AdminTurnos() {
     if (!window.confirm("¿Eliminar este turno?")) return;
 
     await deleteDoc(doc(db, "turnos", id));
-
     cargarTurnos();
   }
-  <AdminCard
-    titulo={turno.fecha}
-    subtitulo={turno.dia}
-    onEdit={() => setEditing(turno)}
-    onDelete={() => eliminar(turno.id)}
-></AdminCard>
 
   return (
     <div className="max-w-6xl mx-auto p-5">
 
-   <AdminHeader
-  titulo="Administrar Turnos"
-  subtitulo="Gestiona los turnos del ministerio."
-/>
+      <AdminHeader
+        titulo="Administrar Turnos"
+        subtitulo="Gestiona los turnos del ministerio."
+      />
 
       <TurnoForm
         onSave={guardar}
@@ -82,94 +71,32 @@ export default function AdminTurnos() {
         <div className="grid gap-4">
 
           {turnos.map((turno) => (
-
-            <div
+            <AdminCard
               key={turno.id}
-              className="bg-white rounded-xl shadow p-5"
+              titulo={turno.fecha}
+              subtitulo={turno.dia}
+              onEdit={() => setEditing(turno)}
+              onDelete={() => eliminar(turno.id)}
             >
-
-              <div className="flex justify-between items-start">
-
-                <div>
-
-                  <h2 className="text-xl font-bold">
-                    {turno.fecha}
-                  </h2>
-
-                  <p className="text-blue-600 font-semibold">
-                    {turno.dia}
-                  </p>
-
-                  {turno.dia === "Miércoles" ? (
-                    <>
-                      <p>
-                        <strong>Cabina:</strong>{" "}
-                        {turno.cabina}
-                      </p>
-
-                      <p>
-                        <strong>Transmisión:</strong>{" "}
-                        {turno.transmision}
-                      </p>
-
-                      <p>
-                        <strong>Fotos:</strong>{" "}
-                        {turno.fotos}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <p>
-                        <strong>Cabina Culto:</strong>{" "}
-                        {turno.cabinaCulto}
-                      </p>
-
-                      <p>
-                        <strong>Cabina Devocional:</strong>{" "}
-                        {turno.cabinaDevocional}
-                      </p>
-
-                      <p>
-                        <strong>Transmisión:</strong>{" "}
-                        {turno.transmision}
-                      </p>
-
-                      <p>
-                        <strong>Fotos:</strong>{" "}
-                        {turno.fotos}
-                      </p>
-                    </>
-                  )}
-
-                </div>
-
-                <div className="flex gap-3">
-
-                  <button
-                    onClick={() => setEditing(turno)}
-                    className="text-blue-600 hover:text-blue-800 text-xl"
-                  >
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    onClick={() => eliminar(turno.id)}
-                    className="text-red-600 hover:text-red-800 text-xl"
-                  >
-                    <FaTrash />
-                  </button>
-
-                </div>
-
-              </div>
-
-            </div>
-
+              {turno.dia === "Miércoles" ? (
+                <>
+                  <p><strong>Cabina:</strong> {turno.cabina}</p>
+                  <p><strong>Transmisión:</strong> {turno.transmision}</p>
+                  <p><strong>Fotos:</strong> {turno.fotos}</p>
+                </>
+              ) : (
+                <>
+                  <p><strong>Cabina Culto:</strong> {turno.cabinaCulto}</p>
+                  <p><strong>Cabina Devocional:</strong> {turno.cabinaDevocional}</p>
+                  <p><strong>Transmisión:</strong> {turno.transmision}</p>
+                  <p><strong>Fotos:</strong> {turno.fotos}</p>
+                </>
+              )}
+            </AdminCard>
           ))}
 
         </div>
       )}
-
     </div>
   );
 }
