@@ -24,10 +24,10 @@ function App() {
       <Routes>
 
         {/* 🔥 PANTALLA INICIAL */}
-        <Route path="/" element={<Gate />} />
+        <Route path="/" element={<Home />} />
 
         {/* 👀 PUBLICO */}
-        <Route path="/home" element={<Home />} />
+        
         <Route path="/cultos" element={<Cultos />} />
         <Route path="/turnos" element={<Turnos />} />
         <Route path="/equipo" element={<Equipo />} />

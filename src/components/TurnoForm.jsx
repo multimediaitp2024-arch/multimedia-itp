@@ -26,7 +26,7 @@ export default function TurnoForm({
   useEffect(() => {
     async function cargarEquipo() {
       try {
-        const snapshot = await getDocs(collection(db, "equipo"));
+        const snapshot = await getDocs(collection(db, "Equipo"));
 
         const lista = snapshot.docs.map(doc => {
           const data = doc.data();

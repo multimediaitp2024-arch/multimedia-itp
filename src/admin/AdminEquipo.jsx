@@ -29,7 +29,7 @@ export default function AdminEquipo() {
   }, []);
 
   async function cargarEquipo() {
-    const snapshot = await getDocs(collection(db, "equipo"));
+    const snapshot = await getDocs(collection(db, "Equipo"));
 
     const lista = snapshot.docs.map((doc) => ({
       id: doc.id,
@@ -43,7 +43,7 @@ export default function AdminEquipo() {
 
   async function guardar(form) {
     await setDoc(
-      doc(db, "equipo", form.id),
+      doc(db, "Equipo", form.id),
       {
         nombre: form.nombre,
         telefono: form.telefono,
@@ -57,7 +57,7 @@ export default function AdminEquipo() {
   async function eliminar(id) {
     if (!window.confirm("¿Eliminar integrante?")) return;
 
-    await deleteDoc(doc(db, "equipo", id));
+    await deleteDoc(doc(db, "Equipo", id));
 
     cargarEquipo();
   }
@@ -82,12 +82,7 @@ export default function AdminEquipo() {
         editing={editing}
         onCancel={() => setEditing(null)}
       />
-      <AdminCard
-    titulo={persona.nombre}
-    subtitulo={persona.telefono}
-    onEdit={() => setEditing(persona)}
-    onDelete={() => eliminar(persona.id)}
-></AdminCard>
+    
 
       {equipo.length === 0 ? (
 

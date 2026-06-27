@@ -24,7 +24,7 @@ export default function AdminLimpieza() {
   }, []);
 
   async function cargarLimpiezas() {
-    const snapshot = await getDocs(collection(db, "limpieza"));
+    const snapshot = await getDocs(collection(db, "Limpieza"));
 
     const lista = snapshot.docs.map((doc) => ({
       id: doc.id,
@@ -41,7 +41,7 @@ export default function AdminLimpieza() {
   async function guardar(form) {
     if (editing) {
       await updateDoc(
-        doc(db, "limpieza", editing.id),
+        doc(db, "Limpieza", editing.id),
         {
           fechaInicio: form.fechaInicio,
           fechaFin: form.fechaFin,
@@ -50,7 +50,7 @@ export default function AdminLimpieza() {
       );
     } else {
       await addDoc(
-        collection(db, "limpieza"),
+        collection(db, "Limpieza"),
         form
       );
     }
@@ -62,7 +62,7 @@ export default function AdminLimpieza() {
   async function eliminar(id) {
     if (!window.confirm("¿Eliminar este registro?")) return;
 
-    await deleteDoc(doc(db, "limpieza", id));
+    await deleteDoc(doc(db, "Limpieza", id));
 
     cargarLimpiezas();
   }
@@ -74,12 +74,7 @@ export default function AdminLimpieza() {
   titulo="Administrar Limpieza"
   subtitulo="Organiza el cronograma de limpieza."
 />
-<AdminCard
-    titulo={item.responsable}
-    subtitulo={`${item.fechaInicio} - ${item.fechaFin}`}
-    onEdit={() => setEditing(item)}
-    onDelete={() => eliminar(item.id)}
-></AdminCard>
+
 
       <LimpiezaForm
         onSave={guardar}

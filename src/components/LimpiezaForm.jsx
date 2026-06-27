@@ -30,7 +30,7 @@ export default function LimpiezaForm({
   }, [editing]);
 
   async function cargarEquipo() {
-    const snapshot = await getDocs(collection(db, "equipo"));
+    const snapshot = await getDocs(collection(db, "Equipo"));
 
     const lista = snapshot.docs.map((doc) => ({
       id: doc.id,
