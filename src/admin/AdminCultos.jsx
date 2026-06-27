@@ -1,271 +1,171 @@
-import { useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
-  setDoc,
   deleteDoc,
   doc,
+  getDocs,
+  setDoc,
 } from "firebase/firestore";
+
+import {
+  useEffect,
+  useState,
+} from "react";
+
 import { db } from "../firebase";
 
-function AdminCultos() {
+import CultoForm from "../components/CultoForm";
+
+import {
+  FaEdit,
+  FaTrash,
+} from "react-icons/fa";
+
+export default function AdminCultos() {
+
   const [cultos, setCultos] = useState([]);
 
-  const [form, setForm] = useState({
-    fecha: "",
-    dia: "Miércoles",
-    predicador: "",
-    tema: "",
-    versiculos: "",
-  });
+  const [editing, setEditing] = useState(null);
 
-  const [editando, setEditando] = useState(false);
+  async function cargarCultos() {
+
+    const snapshot = await getDocs(
+      collection(db, "cultos")
+    );
+
+    const lista = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    lista.sort((a, b) =>
+      a.fecha.localeCompare(b.fecha)
+    );
+
+    setCultos(lista);
+  }
 
   useEffect(() => {
     cargarCultos();
   }, []);
 
-  async function cargarCultos() {
-    const snapshot = await getDocs(collection(db, "Cultos"));
+  async function guardar(form) {
 
-    const lista = [];
+    await setDoc(
+      doc(db, "cultos", form.fecha),
+      form
+    );
 
-    snapshot.forEach((docu) => {
-      lista.push({
-        id: docu.id,
-        ...docu.data(),
-      });
-    });
-
-    lista.sort((a, b) => a.fecha.localeCompare(b.fecha));
-
-    setCultos(lista);
-  }
-
-  async function guardarCulto() {
-    if (!form.fecha) return alert("Seleccione una fecha.");
-
-    await setDoc(doc(db, "Cultos", form.fecha), form);
-
-    limpiar();
+    setEditing(null);
 
     cargarCultos();
-  }
-
-  function editar(culto) {
-    setForm(culto);
-    setEditando(true);
   }
 
   async function eliminar(id) {
-    if (!window.confirm("¿Eliminar este culto?")) return;
 
-    await deleteDoc(doc(db, "Cultos", id));
+    if (!confirm("¿Eliminar culto?"))
+      return;
+
+    await deleteDoc(
+      doc(db, "cultos", id)
+    );
 
     cargarCultos();
   }
 
-  function limpiar() {
-    setForm({
-      fecha: "",
-      dia: "Miércoles",
-      predicador: "",
-      tema: "",
-      versiculos: "",
-    });
-
-    setEditando(false);
-  }
-
   return (
-    <div
-      style={{
-        maxWidth: 700,
-        margin: "20px auto",
-        padding: 20,
-      }}
-    >
-      <h1>📅 Administrar Cultos</h1>
 
-      <div
-        style={{
-          background: "#fff",
-          padding: 20,
-          borderRadius: 15,
-          marginBottom: 30,
-          boxShadow: "0 4px 15px rgba(0,0,0,.1)",
-        }}
-      >
-        <input
-          type="date"
-          value={form.fecha}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              fecha: e.target.value,
-            })
-          }
-          style={input}
-        />
+    <div className="max-w-5xl mx-auto p-5">
 
-        <select
-          value={form.dia}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              dia: e.target.value,
-            })
-          }
-          style={input}
-        >
-          <option>Miércoles</option>
-          <option>Domingo</option>
-        </select>
+      <h1 className="text-3xl font-bold mb-6">
 
-        <input
-          placeholder="Predicador"
-          value={form.predicador}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              predicador: e.target.value,
-            })
-          }
-          style={input}
-        />
+        Administrar Cultos
 
-        <input
-          placeholder="Tema"
-          value={form.tema}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              tema: e.target.value,
-            })
-          }
-          style={input}
-        />
+      </h1>
 
-        <input
-          placeholder="Versículos"
-          value={form.versiculos}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              versiculos: e.target.value,
-            })
-          }
-          style={input}
-        />
+      <CultoForm
+        onSave={guardar}
+        editing={editing}
+        onCancel={() => setEditing(null)}
+      />
 
-        <button
-          onClick={guardarCulto}
-          style={botonGuardar}
-        >
-          {editando ? "Actualizar" : "Guardar"}
-        </button>
+      <div className="grid gap-4">
 
-        {editando && (
-          <button
-            onClick={limpiar}
-            style={botonCancelar}
+        {cultos.map((culto) => (
+
+          <div
+            key={culto.id}
+            className="bg-white shadow rounded-xl p-5 flex justify-between items-start"
           >
-            Cancelar
-          </button>
+
+            <div>
+
+              <h2 className="font-bold text-lg">
+
+                {culto.fecha}
+
+              </h2>
+
+              <p>
+                <b>Día:</b> {culto.dia}
+              </p>
+
+              <p>
+                <b>Predicador:</b>{" "}
+                {culto.predicador}
+              </p>
+
+              <p>
+                <b>Tema:</b>{" "}
+                {culto.tema}
+              </p>
+
+              <p>
+                <b>Versículos:</b>{" "}
+                {culto.versiculos}
+              </p>
+
+            </div>
+
+            <div className="flex gap-3">
+
+              <button
+                onClick={() =>
+                  setEditing(culto)
+                }
+                className="text-blue-600 text-xl"
+              >
+                <FaEdit />
+              </button>
+
+              <button
+                onClick={() =>
+                  eliminar(culto.id)
+                }
+                className="text-red-600 text-xl"
+              >
+                <FaTrash />
+              </button>
+
+            </div>
+
+          </div>
+
+        ))}
+
+        {cultos.length === 0 && (
+
+          <div className="bg-white rounded-xl shadow p-6 text-center text-gray-500">
+
+            No existen cultos registrados.
+
+          </div>
+
         )}
+
       </div>
 
-      {cultos.map((culto) => (
-        <div
-          key={culto.id}
-          style={{
-            background: "#fff",
-            padding: 18,
-            borderRadius: 15,
-            marginBottom: 15,
-            boxShadow: "0 3px 12px rgba(0,0,0,.08)",
-          }}
-        >
-          <h3>
-            {culto.dia} - {culto.fecha}
-          </h3>
-
-          <p>
-            <b>Predicador:</b> {culto.predicador}
-          </p>
-
-          <p>
-            <b>Tema:</b> {culto.tema}
-          </p>
-
-          <p>
-            <b>Versículos:</b> {culto.versiculos}
-          </p>
-
-          <button
-            onClick={() => editar(culto)}
-            style={botonEditar}
-          >
-            Editar
-          </button>
-
-          <button
-            onClick={() => eliminar(culto.id)}
-            style={botonEliminar}
-          >
-            Eliminar
-          </button>
-        </div>
-      ))}
     </div>
+
   );
+
 }
-
-const input = {
-  width: "100%",
-  padding: 10,
-  marginBottom: 12,
-  borderRadius: 10,
-  border: "1px solid #ccc",
-  boxSizing: "border-box",
-};
-
-const botonGuardar = {
-  padding: "10px 18px",
-  background: "#0F766E",
-  color: "#fff",
-  border: "none",
-  borderRadius: 10,
-  cursor: "pointer",
-  marginRight: 10,
-};
-
-const botonCancelar = {
-  padding: "10px 18px",
-  background: "#888",
-  color: "#fff",
-  border: "none",
-  borderRadius: 10,
-  cursor: "pointer",
-};
-
-const botonEditar = {
-  marginRight: 10,
-  padding: "8px 15px",
-  background: "#2563EB",
-  color: "#fff",
-  border: "none",
-  borderRadius: 8,
-  cursor: "pointer",
-};
-
-const botonEliminar = {
-  padding: "8px 15px",
-  background: "#DC2626",
-  color: "#fff",
-  border: "none",
-  borderRadius: 8,
-  cursor: "pointer",
-};
-
-export default AdminCultos;
