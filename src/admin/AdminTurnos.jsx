@@ -23,7 +23,7 @@ export default function AdminTurnos() {
   }, []);
 
   async function cargarTurnos() {
-    const snapshot = await getDocs(collection(db, "turnos"));
+    const snapshot = await getDocs(collection(db, "Turnos"));
 
     const lista = snapshot.docs.map((doc) => ({
       id: doc.id,
@@ -36,7 +36,7 @@ export default function AdminTurnos() {
   }
 
   async function guardar(form) {
-    await setDoc(doc(db, "turnos", form.fecha), form);
+    await setDoc(doc(db, "Turnos", form.fecha), form);
 
     setEditing(null);
     cargarTurnos();
@@ -45,7 +45,7 @@ export default function AdminTurnos() {
   async function eliminar(id) {
     if (!window.confirm("¿Eliminar este turno?")) return;
 
-    await deleteDoc(doc(db, "turnos", id));
+    await deleteDoc(doc(db, "Turnos", id));
     cargarTurnos();
   }
 

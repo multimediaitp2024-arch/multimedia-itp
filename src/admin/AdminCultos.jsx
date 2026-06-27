@@ -31,7 +31,7 @@ export default function AdminCultos() {
   async function cargarCultos() {
 
     const snapshot = await getDocs(
-      collection(db, "cultos")
+      collection(db, "Cultos")
     );
 
     const lista = snapshot.docs.map((doc) => ({
@@ -53,7 +53,7 @@ export default function AdminCultos() {
   async function guardar(form) {
 
     await setDoc(
-      doc(db, "cultos", form.fecha),
+      doc(db, "Cultos", form.fecha),
       form
     );
 
@@ -68,7 +68,7 @@ export default function AdminCultos() {
       return;
 
     await deleteDoc(
-      doc(db, "cultos", id)
+      doc(db, "Cultos", id)
     );
 
     cargarCultos();
