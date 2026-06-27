@@ -1,3 +1,4 @@
+
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
@@ -6,21 +7,13 @@ import {
   FaUsers,
   FaBroom,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-export default function BottomNav() {
-  return (
-    <div>
-      <Link to="/login">🔐 Admin</Link>
-    </div>
-  );
-}
 export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const tabs = [
-    { label: "Inicio", icon: <FaHome />, path: "/" },
+    { label: "Inicio", icon: <FaHome />, path: "/home" },
     { label: "Cultos", icon: <FaChurch />, path: "/cultos" },
     { label: "Turnos", icon: <FaVideo />, path: "/turnos" },
     { label: "Equipo", icon: <FaUsers />, path: "/equipo" },
@@ -34,12 +27,13 @@ export default function BottomNav() {
         bottom: 0,
         left: 0,
         right: 0,
-        background: "#ffffff",
+        background: "#0F766E",
         display: "flex",
         justifyContent: "space-around",
+        alignItems: "center",
         padding: "10px 0",
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
-        zIndex: 1000,
+        boxShadow: "0 -4px 12px rgba(0,0,0,.2)",
+        zIndex: 999,
       }}
     >
       {tabs.map((tab) => (
@@ -47,22 +41,24 @@ export default function BottomNav() {
           key={tab.path}
           onClick={() => navigate(tab.path)}
           style={{
-            background: "none",
+            background: "transparent",
             border: "none",
             color:
               location.pathname === tab.path
-                ? "#0F766E"
-                : "#6B7280",
+                ? "#FFFFFF"
+                : "#D1FAE5",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            fontSize: "12px",
+            gap: 4,
             cursor: "pointer",
+            fontSize: 12,
           }}
         >
-          <div style={{ fontSize: "18px" }}>
+          <div style={{ fontSize: 22 }}>
             {tab.icon}
           </div>
+
           {tab.label}
         </button>
       ))}

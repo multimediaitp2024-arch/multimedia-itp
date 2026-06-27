@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BottomNav from "../components/BottomNav";
 import {
   FaCalendarAlt,
   FaUsers,
@@ -100,7 +101,7 @@ export default function Home() {
 
         {/* BOTÓN ADMIN */}
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 mb-24 flex justify-center">
 
           <Link
             to="/login"
@@ -113,6 +114,7 @@ export default function Home() {
         </div>
 
       </div>
+       <BottomNav />
 
     </div>
   );
