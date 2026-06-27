@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Gate from "./pages/Gate";
 import Home from "./pages/Home";
 import Login from "./admin/Login";
 import Dashboard from "./admin/Dashboard";
@@ -23,21 +22,20 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* 🔥 PANTALLA INICIAL */}
+        {/* Página principal */}
         <Route path="/" element={<Home />} />
 
-        {/* 👀 PUBLICO */}
-        <Route path="/" element={<Home />} />
+        {/* Público */}
         <Route path="/cultos" element={<Cultos />} />
         <Route path="/turnos" element={<Turnos />} />
         <Route path="/equipo" element={<Equipo />} />
         <Route path="/limpieza" element={<Limpieza />} />
         <Route path="/envivo" element={<EnVivo />} />
 
-        {/* 🔐 LOGIN ADMIN */}
+        {/* Login */}
         <Route path="/login" element={<Login />} />
 
-        {/* 🛡 ADMIN PROTEGIDO */}
+        {/* Admin */}
         <Route
           path="/admin"
           element={
@@ -93,7 +91,6 @@ function App() {
         />
 
       </Routes>
-    
     </BrowserRouter>
   );
 }

@@ -14,7 +14,7 @@ export default function BottomNav() {
   const location = useLocation();
 
   const tabs = [
-    { label: "Inicio", icon: <FaHome />, path: "/home" },
+    { label: "Inicio", icon: <FaHome />, path: "/" },
     { label: "Cultos", icon: <FaChurch />, path: "/cultos" },
     { label: "Turnos", icon: <FaCalendarAlt />, path: "/turnos" },
     { label: "Equipo", icon: <FaUsers />, path: "/equipo" },
