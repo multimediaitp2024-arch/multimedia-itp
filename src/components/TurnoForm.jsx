@@ -119,6 +119,8 @@ export default function TurnoForm({
           >
             <option value="">Seleccione</option>
             <option>Miércoles</option>
+            <option>Jueves</option>
+            <option>Sábado</option>
             <option>Domingo</option>
           </select>
         </div>
@@ -131,6 +133,22 @@ export default function TurnoForm({
             <CampoPersona titulo="Transmisión" nombre="transmision" valor={form.transmision} lista={equipo} cambio={handleChange} />
 
             <CampoPersona titulo="Fotos" nombre="fotos" valor={form.fotos} lista={equipo} cambio={handleChange} />
+          </>
+        )}
+           {/* JUEVES */}
+        {form.dia === "Jueves" && (
+          <>
+            <CampoPersona titulo="Cabina" nombre="cabina" valor={form.cabina} lista={equipo} cambio={handleChange} />
+
+           
+          </>
+        )}
+           {/* SABADO */}
+        {form.dia === "Sábado" && (
+          <>
+            <CampoPersona titulo="Cabina" nombre="cabina" valor={form.cabina} lista={equipo} cambio={handleChange} />
+
+            
           </>
         )}
 

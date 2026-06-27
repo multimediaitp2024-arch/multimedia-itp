@@ -1,5 +1,4 @@
-
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminHeader({
@@ -19,32 +18,66 @@ export default function AdminHeader({
         boxShadow: "0 8px 20px rgba(0,0,0,.15)",
       }}
     >
-      <button
-        onClick={() => navigate("/admin")}
+      <div
         style={{
-          background: "rgba(255,255,255,.15)",
-          border: "none",
-          color: "#fff",
-          padding: "10px 16px",
-          borderRadius: "10px",
-          cursor: "pointer",
           display: "flex",
-          alignItems: "center",
-          gap: "8px",
+          gap: "10px",
           marginBottom: "18px",
-          fontWeight: "bold",
-          transition: ".2s",
+          flexWrap: "wrap",
         }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.background = "rgba(255,255,255,.25)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.background = "rgba(255,255,255,.15)")
-        }
       >
-        <FaArrowLeft />
-        Volver al Panel
-      </button>
+        <button
+          onClick={() => navigate("/admin")}
+          style={{
+            background: "rgba(255,255,255,.15)",
+            border: "none",
+            color: "#fff",
+            padding: "10px 16px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontWeight: "bold",
+            transition: ".2s",
+          }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.background = "rgba(255,255,255,.25)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "rgba(255,255,255,.15)")
+          }
+        >
+          <FaArrowLeft />
+          Volver al Panel
+        </button>
+
+        <button
+          onClick={() => navigate("/")}
+          style={{
+            background: "#fff",
+            border: "none",
+            color: "#0F766E",
+            padding: "10px 16px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontWeight: "bold",
+            transition: ".2s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = "0.9";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = "1";
+          }}
+        >
+          <FaHome />
+          Dashboard
+        </button>
+      </div>
 
       <h1
         style={{

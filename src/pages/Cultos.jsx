@@ -198,46 +198,14 @@ function Cultos() {
 
             <h3>📖 Versículos</h3>
 
-            {cultoActual.versiculo1 && (
-              <p>📖 {cultoActual.versiculo1}</p>
-            )}
-
-            {cultoActual.versiculo2 && (
-              <p>📖 {cultoActual.versiculo2}</p>
-            )}
-
-            {cultoActual.versiculo3 && (
-              <p>📖 {cultoActual.versiculo3}</p>
-            )}
-
-            {cultoActual.versiculo4 && (
-              <p>📖 {cultoActual.versiculo4}</p>
-            )}
-
-            {cultoActual.versiculo5 && (
-              <p>📖 {cultoActual.versiculo5}</p>
-            )}
-
-            {cultoActual.versiculo6 && (
-              <p>📖 {cultoActual.versiculo6}</p>
-            )}
-
-            {cultoActual.versiculo7 && (
-              <p>📖 {cultoActual.versiculo7}</p>
-            )}
-
-            {cultoActual.versiculo8 && (
-              <p>📖 {cultoActual.versiculo8}</p>
-            )}
-
-            {cultoActual.versiculo9 && (
-              <p>📖 {cultoActual.versiculo9}</p>
-            )}
-
-            {cultoActual.versiculo10 && (
-              <p>📖 {cultoActual.versiculo10}</p>
-            )}
-
+<div
+  style={{
+    whiteSpace: "pre-line",
+    lineHeight: "1.8",
+  }}
+>
+  {cultoActual.versiculos || "Pendiente"}
+</div>
             {cultoActual.notas && (
               <>
                 <hr />

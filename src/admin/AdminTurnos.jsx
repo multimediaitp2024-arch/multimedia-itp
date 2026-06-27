@@ -79,19 +79,23 @@ export default function AdminTurnos() {
               onDelete={() => eliminar(turno.id)}
             >
               {turno.dia === "Miércoles" ? (
-                <>
-                  <p><strong>Cabina:</strong> {turno.cabina}</p>
-                  <p><strong>Transmisión:</strong> {turno.transmision}</p>
-                  <p><strong>Fotos:</strong> {turno.fotos}</p>
-                </>
-              ) : (
-                <>
-                  <p><strong>Cabina Culto:</strong> {turno.cabinaCulto}</p>
-                  <p><strong>Cabina Devocional:</strong> {turno.cabinaDevocional}</p>
-                  <p><strong>Transmisión:</strong> {turno.transmision}</p>
-                  <p><strong>Fotos:</strong> {turno.fotos}</p>
-                </>
-              )}
+  <>
+    <p><strong>Cabina:</strong> {turno.cabina}</p>
+    <p><strong>Transmisión:</strong> {turno.transmision}</p>
+    <p><strong>Fotos:</strong> {turno.fotos}</p>
+  </>
+) : ["Jueves", "Sábado"].includes(turno.dia) ? (
+  <>
+    <p><strong>Cabina:</strong> {turno.cabina}</p>
+  </>
+) : (
+  <>
+    <p><strong>Cabina Culto:</strong> {turno.cabinaCulto}</p>
+    <p><strong>Cabina Devocional:</strong> {turno.cabinaDevocional}</p>
+    <p><strong>Transmisión:</strong> {turno.transmision}</p>
+    <p><strong>Fotos:</strong> {turno.fotos}</p>
+  </>
+)}
             </AdminCard>
           ))}
 
