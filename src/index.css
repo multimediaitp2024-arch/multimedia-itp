@@ -31,3 +31,14 @@ img {
   max-width: 100%;
   display: block;
 }
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

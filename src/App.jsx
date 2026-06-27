@@ -93,6 +93,7 @@ function App() {
         />
 
       </Routes>
+      <BottomNav />
     </BrowserRouter>
   );
 }
