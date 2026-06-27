@@ -31,13 +31,7 @@ function PublicLayout() {
   );
 }
 
-function AdminLayout() {
-  return (
-    <PrivateRoute>
-      <Outlet />
-    </PrivateRoute>
-  );
-}
+
 
 function App() {
   return (
@@ -72,7 +66,6 @@ function App() {
 
         
 
-         <Route path="/login" element={<Login />} />
 
 <Route
   path="/admin"
