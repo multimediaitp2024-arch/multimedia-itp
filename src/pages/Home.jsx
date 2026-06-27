@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import BottomNav from "../components/BottomNav";
 import {
   FaCalendarAlt,
   FaUsers,
@@ -9,113 +8,160 @@ import {
   FaLock,
 } from "react-icons/fa";
 
+import BottomNav from "../components/BottomNav";
+
 export default function Home() {
   const cards = [
     {
       titulo: "Turnos",
-      icono: <FaCalendarAlt size={38} />,
-      color: "#1e3a8a",
+      icono: <FaCalendarAlt size={42} color="#1E3A8A" />,
       ruta: "/turnos",
     },
     {
       titulo: "Cultos",
-      icono: <FaChurch size={38} />,
-      color: "#92400e",
+      icono: <FaChurch size={42} color="#92400E" />,
       ruta: "/cultos",
     },
     {
       titulo: "Equipo",
-      icono: <FaUsers size={38} />,
-      color: "#0f766e",
+      icono: <FaUsers size={42} color="#0F766E" />,
       ruta: "/equipo",
     },
     {
       titulo: "Limpieza",
-      icono: <FaBroom size={38} />,
-      color: "#15803d",
+      icono: <FaBroom size={42} color="#15803D" />,
       ruta: "/limpieza",
     },
     {
       titulo: "En Vivo",
-      icono: <FaVideo size={38} />,
-      color: "#7e22ce",
+      icono: <FaVideo size={42} color="#7E22CE" />,
       ruta: "/envivo",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div
+      style={{
+        background: "#F3F4F6",
+        minHeight: "100vh",
+        paddingBottom: "90px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          padding: "25px",
+        }}
+      >
+        {/* Logo */}
 
-      <div className="max-w-6xl mx-auto p-6">
-
-        {/* ENCABEZADO */}
-
-        <div className="text-center mb-10">
-
+        <div style={{ textAlign: "center", marginBottom: 35 }}>
           <img
             src="/logo.png"
             alt="Logo"
-            className="w-28 mx-auto mb-5"
+            style={{
+              width: 110,
+              marginBottom: 15,
+            }}
           />
 
-          <h1 className="text-5xl font-bold text-slate-900">
+          <h1
+            style={{
+              margin: 0,
+              fontSize: 50,
+              color: "#102A43",
+            }}
+          >
             Iglesia Tabernáculo
             <br />
             Pentecostal
           </h1>
 
-          <p className="text-2xl text-teal-700 mt-3">
-            Ministerio de Multimedia 2026
+          <p
+            style={{
+              marginTop: 15,
+              fontSize: 24,
+              color: "#0F766E",
+            }}
+          >
+            Ministerio Multimedia 2026
           </p>
-
         </div>
 
-        {/* TARJETAS */}
+        {/* Tarjetas */}
 
-        <div className="grid md:grid-cols-2 gap-6">
-
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+            gap: 25,
+          }}
+        >
           {cards.map((card) => (
-
             <Link
               key={card.titulo}
               to={card.ruta}
-              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition p-10 text-center"
+              style={{
+                background: "#fff",
+                borderRadius: 25,
+                padding: 40,
+                textAlign: "center",
+                textDecoration: "none",
+                color: "#374151",
+                boxShadow: "0 5px 18px rgba(0,0,0,.12)",
+              }}
             >
-
               <div
-                className="mb-4 flex justify-center"
-                style={{ color: card.color }}
+                style={{
+                  marginBottom: 18,
+                }}
               >
                 {card.icono}
               </div>
 
-              <h2 className="text-2xl font-bold text-gray-700">
+              <h2
+                style={{
+                  margin: 0,
+                  fontSize: 28,
+                }}
+              >
                 {card.titulo}
               </h2>
-
             </Link>
-
           ))}
-
         </div>
 
-        {/* BOTÓN ADMIN */}
+        {/* Botón Admin */}
 
-        <div className="mt-10 mb-24 flex justify-center">
-
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 35,
+          }}
+        >
           <Link
             to="/login"
-            className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-xl flex items-center gap-2"
+            style={{
+              background: "#2563EB",
+              color: "white",
+              textDecoration: "none",
+              padding: "14px 28px",
+              borderRadius: 15,
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              fontWeight: "bold",
+            }}
           >
             <FaLock />
             Iniciar sesión (Admin)
           </Link>
-
         </div>
-
       </div>
-       <BottomNav />
 
+      <BottomNav />
     </div>
   );
 }

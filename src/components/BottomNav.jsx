@@ -4,6 +4,7 @@ import {
   FaHome,
   FaChurch,
   FaVideo,
+  FaCalendarAlt,
   FaUsers,
   FaBroom,
 } from "react-icons/fa";
@@ -15,7 +16,7 @@ export default function BottomNav() {
   const tabs = [
     { label: "Inicio", icon: <FaHome />, path: "/home" },
     { label: "Cultos", icon: <FaChurch />, path: "/cultos" },
-    { label: "Turnos", icon: <FaVideo />, path: "/turnos" },
+    { label: "Turnos", icon: <FaCalendarAlt />, path: "/turnos" },
     { label: "Equipo", icon: <FaUsers />, path: "/equipo" },
     { label: "Limpieza", icon: <FaBroom />, path: "/limpieza" },
   ];
