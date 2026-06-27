@@ -286,3 +286,31 @@ body {
   color: white !important;
   border-radius: 50%;
 }
+.equipo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:20px;
+}
+
+.tarjeta{
+    background:#fff;
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.foto{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    margin:auto;
+    display:block;
+}
+
+.nombre{
+    font-weight:bold;
+    margin:10px 0;
+}
