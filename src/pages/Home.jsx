@@ -21,39 +21,53 @@ export default function Home() {
   const [proximoCulto, setProximoCulto] = useState(null);
 
   useEffect(() => {
-    async function cargarDatos() {
-      // TURNOS
-      const turnosSnap = await getDocs(collection(db, "turnos"));
+  async function cargarDatos() {
+    try {
+      // ===== TURNOS =====
+      const turnosSnap = await getDocs(collection(db, "Turnos"));
+
+      console.log("Cantidad turnos:", turnosSnap.size);
 
       const turnos = turnosSnap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
+      console.log("Turnos:", turnos);
+
       turnos.sort((a, b) => a.fecha.localeCompare(b.fecha));
 
       if (turnos.length > 0) {
+        console.log("Próximo turno:", turnos[0]);
         setProximoTurno(turnos[0]);
       }
 
-      // CULTOS
+      // ===== CULTOS =====
+      const cultosSnap = await getDocs(collection(db, "Cultos"));
 
-      const cultosSnap = await getDocs(collection(db, "cultos"));
+      console.log("Cantidad cultos:", cultosSnap.size);
 
       const cultos = cultosSnap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
+      console.log("Cultos:", cultos);
+
       cultos.sort((a, b) => a.fecha.localeCompare(b.fecha));
 
       if (cultos.length > 0) {
+        console.log("Próximo culto:", cultos[0]);
         setProximoCulto(cultos[0]);
       }
-    }
 
-    cargarDatos();
-  }, []);
+    } catch (error) {
+      console.error("ERROR FIREBASE:", error);
+    }
+  }
+
+  cargarDatos();
+}, []);
 
   const cards = [
     {
@@ -156,18 +170,17 @@ export default function Home() {
             </h3>
 
             {proximoTurno ? (
-              <>
-                <p>
-                  <strong>Fecha:</strong> {proximoTurno.fecha}
-                </p>
-
-                <p>
-                  <strong>Día:</strong> {proximoTurno.dia}
-                </p>
-              </>
-            ) : (
-              <p>No existen turnos registrados.</p>
-            )}
+  <>
+    <p><strong>Fecha:</strong> {proximoTurno.fecha}</p>
+    <p><strong>Día:</strong> {proximoTurno.dia}</p>
+    <hr />
+    <p><strong>🎛 Cabina:</strong> {proximoTurno.cabina}</p>
+    <p><strong>📷 Fotos:</strong> {proximoTurno.fotos}</p>
+    <p><strong>🎥 Transmisión:</strong> {proximoTurno.transmision}</p>
+  </>
+) : (
+  <p>No existen turnos registrados.</p>
+)}
           </div>
 
           <div
@@ -183,18 +196,16 @@ export default function Home() {
             </h3>
 
             {proximoCulto ? (
-              <>
-                <p>
-                  <strong>Fecha:</strong> {proximoCulto.fecha}
-                </p>
-
-                <p>
-                  <strong>Día:</strong> {proximoCulto.dia}
-                </p>
-              </>
-            ) : (
-              <p>No existen cultos registrados.</p>
-            )}
+  <>
+    <p><strong>Fecha:</strong> {proximoCulto.fecha}</p>
+    <p><strong>Día:</strong> {proximoCulto.dia}</p>
+    <hr />
+    <p><strong>📖 Tema:</strong> {proximoCulto.tema}</p>
+    <p><strong>🎤 Pastor:</strong> {proximoCulto.predicador}</p>
+  </>
+) : (
+  <p>No existen cultos registrados.</p>
+)}
           </div>
         </div>
 

@@ -27,7 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         {/* 👀 PUBLICO */}
-        
+        <Route path="/" element={<Home />} />
         <Route path="/cultos" element={<Cultos />} />
         <Route path="/turnos" element={<Turnos />} />
         <Route path="/equipo" element={<Equipo />} />
