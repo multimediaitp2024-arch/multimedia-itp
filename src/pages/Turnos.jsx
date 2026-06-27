@@ -1,4 +1,4 @@
-
+import BottomNav from "../components/BottomNav";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { collection, getDocs } from "firebase/firestore";
@@ -225,6 +225,7 @@ function Turnos() {
           </>
         )}
       </div>
+       <BottomNav />
     </div>
   );
 }

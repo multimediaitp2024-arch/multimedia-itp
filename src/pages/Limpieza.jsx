@@ -1,4 +1,4 @@
-
+import BottomNav from "../components/BottomNav";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
@@ -103,6 +103,7 @@ function Limpieza() {
           </p>
         </div>
       )}
+ <BottomNav />
     </div>
   );
 }

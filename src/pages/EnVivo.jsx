@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BottomNav from "../components/BottomNav";
 import { FaWhatsapp } from "react-icons/fa";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -134,6 +135,7 @@ function EnVivo() {
 
         <p>✅ Iniciar transmisión</p>
       </div>
+      <BottomNav />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import BottomNav from "../components/BottomNav";
 import Calendar from "react-calendar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
@@ -256,6 +257,7 @@ function Cultos() {
           </>
         )}
       </div>
+        <BottomNav />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BottomNav from "../components/BottomNav";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import {
@@ -279,6 +280,7 @@ function Equipo() {
           No existen integrantes registrados.
         </div>
       )}
+      <BottomNav />
     </div>
   );
 }
