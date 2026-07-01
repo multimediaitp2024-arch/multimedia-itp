@@ -37,10 +37,12 @@ function Equipo() {
     setEquipo(lista);
   }
 
+  // ✅ CORREGIDO
   async function cargarTurno() {
     const querySnapshot = await getDocs(collection(db, "Turnos"));
 
     const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
 
     const lista = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -49,14 +51,25 @@ function Equipo() {
 
     lista.sort((a, b) => a.fecha.localeCompare(b.fecha));
 
-    const proximo = lista.find((t) => {
+    // Buscar primero el turno de HOY
+    let turno = lista.find((t) => {
       const fecha = new Date(t.fecha + "T00:00:00");
-      return fecha >= hoy;
+      fecha.setHours(0, 0, 0, 0);
+
+      return fecha.getTime() === hoy.getTime();
     });
 
-    if (proximo) {
-      setTurnoHoy(proximo);
+    // Si hoy no hay turno, buscar el siguiente
+    if (!turno) {
+      turno = lista.find((t) => {
+        const fecha = new Date(t.fecha + "T00:00:00");
+        fecha.setHours(0, 0, 0, 0);
+
+        return fecha > hoy;
+      });
     }
+
+    setTurnoHoy(turno || null);
   }
 
   function formatearFecha(fechaTexto) {
@@ -71,7 +84,7 @@ function Equipo() {
   }
 
   return (
-    <div
+        <div
       style={{
         padding: 20,
         paddingBottom: 110,
@@ -127,7 +140,6 @@ function Equipo() {
             }}
           >
             <FaCalendarAlt />
-
             {formatearFecha(turnoHoy.fecha)}
           </p>
 
@@ -199,14 +211,12 @@ function Equipo() {
       >
         {equipo.map((persona) => {
           const foto =
-            fotos[
-              `../assets/equipo/${persona.id}.jpg`
-            ];
+            fotos[`../assets/equipo/${persona.id}.jpg`];
 
           const numeroWhatsapp =
-            "593" +
-            persona.telefono.substring(1);
-                      return (
+            "593" + persona.telefono.substring(1);
+
+          return (
             <div
               key={persona.id}
               style={{
@@ -280,6 +290,7 @@ function Equipo() {
           No existen integrantes registrados.
         </div>
       )}
+
       <BottomNav />
     </div>
   );
